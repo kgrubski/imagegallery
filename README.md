@@ -2,7 +2,7 @@
 1. Skład grupy: Mateusz Burzyński, Krzysztof Grubski i Damian Kotarski 
 2. Temat/Tytuł projektu: Galeria zdjęć 
 3. Rodzaj aplikacji: Webowa
-4. Języki programowania i użyte technologie: Java, Spirngboot, MySQL DB, JavaScript, AngularJS, Docker, Tomcat, Maven
+4. Języki programowania i użyte technologie: Java, Springboot, MySQL DB, JavaScript, AngularJS, Docker, Tomcat, Maven
 5. Krótki opis funkcjonalności: Witryna przeznaczona do publikacji zdjęć zawierająca ranking najlepszych zdjęć 
 
 
@@ -14,7 +14,7 @@ Najważniejsze funkcje:
     - sprawdzanie czy użytkownik już istnieje
  - Logowanie:
     - przypomienie hasła
-    - logwanie za pomocą nazwy użytkownika oraz hasła podanego przy rejestracji
+    - logowanie za pomocą nazwy użytkownika oraz hasła podanego przy rejestracji
     - hasło ukryte
  - Publikacja zdjęć:
     - kompresja dodanych zdjęć
