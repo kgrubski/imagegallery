@@ -1,15 +1,18 @@
-package com.ul.imagegallery;
+package com.ul.imagegallery.controller;
 
-import com.ul.imagegallery.database.entity.User;
 import com.ul.imagegallery.model.UserDto;
+import com.ul.imagegallery.services.picture.PictureService;
 import com.ul.imagegallery.services.user.UserService;
+import com.ul.imagegallery.util.ImageUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.Errors;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.context.request.WebRequest;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -20,6 +23,8 @@ public class WebController {
 
     @Autowired
     UserService userService;
+    @Autowired
+    PictureService pictureService;
 
 
     @GetMapping("/user/registration")
@@ -46,10 +51,12 @@ public class WebController {
     @GetMapping("/")
     public String index(WebRequest request, Model model){
         UserDto userDto = new UserDto();
+        byte[] picture = pictureService.getPicture();
         model.addAttribute("user", userDto);
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-        String currentPrincipalName = authentication.getName();
         userDto.setFirstName(authentication.getName());
+        userDto.setImgUtil(new ImageUtil());
+        userDto.setImgData(picture);
         return "index";
     }
 

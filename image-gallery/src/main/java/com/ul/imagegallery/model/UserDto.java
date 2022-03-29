@@ -1,6 +1,7 @@
 package com.ul.imagegallery.model;
 
 import com.sun.istack.NotNull;
+import com.ul.imagegallery.util.ImageUtil;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -19,6 +20,10 @@ public class UserDto {
 
     @NotNull
     private String email;
+
+    private ImageUtil imgUtil;
+
+    byte[] imgData;
 
     // standard getters and setters
 }

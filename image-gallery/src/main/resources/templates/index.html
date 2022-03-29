@@ -1,6 +1,8 @@
 <html>
 <body>
 Siema <td th:text="${user.firstName}">eniu</td>
+<br>
+<img class='img-thumbnail' th:src="'data:image/jpeg;base64,' + ${user.getImgUtil().getImgData(user.imgData)}" />
 </body>
 
 </html>
