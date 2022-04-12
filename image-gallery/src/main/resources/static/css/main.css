@@ -1,0 +1,157 @@
+* {
+   background-color: #F5F5F5;
+}
+
+.body-class {
+    margin: auto;
+    width: 50%;
+}
+
+.input-field {
+  width: 100%;
+  padding: 12px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  resize: vertical;
+  background-color: #FFFFFF;
+}
+.input-field:focus {
+    background-color: #F8F8F8;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+.input-text {
+   padding: 12px 12px 12px 0;
+   display: inline-block;
+}
+
+.submit-btn {
+  background-color: #04AA6D;
+  color: white;
+  padding: 12px 20px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  float: left;
+  margin-top: 12px;
+  font-size: 12;
+  font-weight: bold;
+}
+
+.submit-btn:hover {
+  background-color: #45a049;
+}
+
+.login-btn {
+  background-color: #04AA6D;
+  color: white;
+  padding: 12px 20px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  text-decoration: none;
+  float: right;
+  margin-top: 12px;
+  font-size: 12;
+}
+
+.login-btn:hover {
+  background-color: #45a049;
+}
+
+.already-registered {
+  margin-top: 22px;
+  margin-right: 8px;
+  float: right;
+}
+
+.success-register {
+    margin: auto;
+    width: 50%;
+    float: center;
+    text-align: center;
+}
+
+.login-btn-success-page {
+  margin: auto;
+  width: 50%;
+  background-color: #04AA6D;
+  color: white;
+  padding: 12px 20px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  text-decoration: none;
+  float: center;
+  margin-top: 12px;
+}
+
+.upload-btn {
+  background-color: #04AA6D;
+  color: white;
+  padding: 12px 20px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  float: center;
+  margin-top: 12px;
+  font-size: 12;
+  font-weight: bold;
+}
+
+.upload-btn:hover {
+  background-color: #45a049;
+}
+
+.choose-img-btn {
+  border: 1px solid #04AA6D;
+  color: #000000;
+  padding: 12px 20px;
+  border-radius: 4px;
+  cursor: pointer;
+  background-color: #F8F8F8;
+  float: center;
+  margin-top: 12px;
+}
+
+ul {
+  width: 100%;
+  min-width: 100%;
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+  background-color:	#E8E8E8;
+}
+
+li {
+  float: left;
+}
+
+li a {
+  display: block;
+  color: #808080;
+  text-align: center;
+  padding: 14px 16px;
+  text-decoration: none;
+  background-color: #E8E8E8
+}
+
+li a:hover {
+  background-color: #E0E0E0;
+}
+
+.home{
+  background-color: #04AA6D;
+  color: white;
+}
+.home:hover{
+  background-color: #45a049;
+}
+
+.img-thumbnail {
+    max-width: 50%;
+    max-height: 50%;
+    border: 1px solid #A9A9A9;
+}

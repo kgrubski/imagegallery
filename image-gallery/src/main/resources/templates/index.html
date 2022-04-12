@@ -1,6 +1,15 @@
 <html>
+    <head>
+        <title>Image Gallery</title>
+        <link rel="stylesheet" type="text/css" href="../static/css/main.css" th:href="@{/css/main.css}" />
+    </head>
 <body>
-Siema <td th:text="${user.firstName}">eniu</td>
+<ul>
+    <li><a class="home" href="/">Home</a></li>
+    <li><a href="/upload">Upload</a></li>
+    <li><a href="/login">Log In</a></li>
+    <li><a href="/user/registration">Register</a></li>
+</ul>
 <br>
 <img class='img-thumbnail' th:src="'data:image/jpeg;base64,' + ${user.getImgUtil().getImgData(user.imgData)}" />
 </body>
