@@ -3,6 +3,7 @@ package com.ul.imagegallery.database.entity;
 import lombok.Data;
 
 import javax.persistence.*;
+import java.util.List;
 import java.util.Set;
 
 @Entity
@@ -29,4 +30,11 @@ public class Post {
     private boolean isPrivate = false;
 
     private boolean isForFriendsOnly = false;
+
+    private String title;
+
+    private String description;
+
+    @OneToMany
+    private List<User> likedBy;
 }

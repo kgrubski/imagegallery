@@ -37,7 +37,7 @@ public class PostServiceImpl implements PostService {
                 break;
             }
 
-            if (post.isForFriendsOnly() && post.getAuthor().getFriend().contains(user)) {
+            if (post.isForFriendsOnly() && post.getAuthor().getFriend().contains(user)) { // todo
                 filteredPostList.add(post);
                 break;
             }
@@ -47,7 +47,7 @@ public class PostServiceImpl implements PostService {
 
 
     @Override
-    public boolean addPost(byte[] file, String authorName, String comment, boolean isForFriendsOnly, boolean isPrivate) {
+    public boolean addPost(byte[] file, String authorName, String title, String description, boolean isForFriendsOnly, boolean isPrivate) {
         Optional<User> user = userRepository.findByUsername(authorName);
         if (user.isEmpty()) {
             return false;
@@ -58,6 +58,8 @@ public class PostServiceImpl implements PostService {
         Post post = new Post();
         post.setAuthor(user.get());
         post.setForFriendsOnly(isForFriendsOnly);
+        post.setTitle(title);
+        post.setDescription(description);
         post.setPrivate(isPrivate);
         post.setPicture(picture);
 
@@ -99,5 +101,39 @@ public class PostServiceImpl implements PostService {
         postRepository.save(post); // todo add commentRepo?
 
         return true;
+    }
+
+    @Override
+    public boolean likeOrUnlikeComment(Long commentID, String userName) {
+        Optional<Post> postFromDb = postRepository.findById(commentID);
+
+        if (postFromDb.isEmpty()) {
+            return false;
+        }
+
+        Optional<User> user = userRepository.findByUsername(userName);
+
+        if (user.isEmpty()) {
+            return false;
+        }
+
+        Post post = postFromDb.get();
+        List<User> likedBy = post.getLikedBy();
+        if (likedBy.contains(user.get())) {
+            likedBy.remove(user.get());
+            post.setLikeCounter(post.getLikeCounter() - 1);
+            postRepository.save(post);
+        }
+        return true;
+    }
+
+    @Override
+    public Post getPostByID(Long commentID) {
+        Optional<Post> postFromDb = postRepository.findById(commentID);
+
+        if (postFromDb.isEmpty()) {
+            return null;
+        }
+        return postFromDb.get();
     }
 }

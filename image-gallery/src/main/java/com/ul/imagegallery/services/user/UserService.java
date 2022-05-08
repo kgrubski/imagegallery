@@ -7,4 +7,6 @@ public interface UserService {
     User findUserByUsername(String username) throws Exception;
 
     User saveUser(String user, String password);
+
+    boolean followUser(String user, String followedUser);
 }
