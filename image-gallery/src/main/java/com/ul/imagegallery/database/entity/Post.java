@@ -25,4 +25,8 @@ public class Post {
     private User author;
 
     private int likeCounter = 0;
+
+    private boolean isPrivate = false;
+
+    private boolean isForFriendsOnly = false;
 }
