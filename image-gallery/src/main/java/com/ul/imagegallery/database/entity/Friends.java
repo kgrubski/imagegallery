@@ -6,19 +6,16 @@ import javax.persistence.*;
 
 @Entity
 @Data
-public class Comment {
-
+public class Friends {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
     @OneToOne
-    @JoinColumn(name = "author_id")
-    private User author;
+    @JoinColumn(name = "user_one_id")
+    private User userOne;
 
-    private String value;
-
-    @ManyToOne
-    @JoinColumn(name = "post_id")
-    private Post post;
+    @OneToOne
+    @JoinColumn(name = "user_two_id")
+    private User userTwo;
 }
