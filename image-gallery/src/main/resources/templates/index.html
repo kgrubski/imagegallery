@@ -24,6 +24,31 @@
     <br>
     Title: <td  th:text="${post.getTitle()}"/>
     <br>
+    Comment: <br>
+    <p th:each="comment: ${post.getCommentList()}">
+        <span th:text="Name + ${comment.getAuthor().getFirstName()}">Name </span>
+        <br>
+        <span th:text="Comment + ${comment.getValue()}">Comment </span>
+    </p>
+    <br>
+    <br>
+    <form th:action="@{/comment/add}" method="POST" enctype="multipart/form-data">
+        <input type="hidden" name="id" th:value="${post.id}" />
+        <p>komentarz: <input type="text" name="value" /></p>
+        <button type="submit" class="submit-btn" th:text="#{label.form.add.comment}">Add comment</button>
+        <br>
+        <br>
+    </form>
+    <br>
+    <br>
+    <form th:action="@{/comment/like}" method="POST" enctype="multipart/form-data">
+        <input type="hidden" name="id" th:value="${post.id}" />
+        <button type="submit" class="submit-btn" th:text="#{label.form.like.comment}">Like</button>
+        <br>
+        <br>
+    </form>
+    <br>
+    <br>
     <br>
 </tr>
 

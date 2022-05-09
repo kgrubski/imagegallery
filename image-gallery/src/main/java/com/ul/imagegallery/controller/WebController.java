@@ -1,10 +1,7 @@
 package com.ul.imagegallery.controller;
 
 import com.ul.imagegallery.database.entity.Post;
-import com.ul.imagegallery.model.PictureDto;
-import com.ul.imagegallery.model.PostDto;
-import com.ul.imagegallery.model.UserDto;
-import com.ul.imagegallery.model.WallDto;
+import com.ul.imagegallery.model.*;
 import com.ul.imagegallery.services.picture.PictureService;
 import com.ul.imagegallery.services.post.PostService;
 import com.ul.imagegallery.services.user.UserService;
@@ -34,8 +31,9 @@ public class WebController {
     @GetMapping("/")
     public String index(WebRequest request, Model model){
         WallDto wallDto = new WallDto();
-
+        CommentDto commentDto = CommentDto.builder().build();
         model.addAttribute("wallDto", wallDto);
+        model.addAttribute("comment", commentDto);
 
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         List<PostDto> postsForUser = postService.getPostsForUser(authentication.getName());

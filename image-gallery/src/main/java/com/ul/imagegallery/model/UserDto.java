@@ -21,9 +21,4 @@ public class UserDto {
     @NotNull
     private String email;
 
-    private ImageUtil imgUtil;
-
-    byte[] imgData;
-
-    // standard getters and setters
 }
