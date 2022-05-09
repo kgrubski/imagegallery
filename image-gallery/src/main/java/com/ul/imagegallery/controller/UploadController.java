@@ -47,6 +47,6 @@ public class UploadController {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         postService.addPost(postDto.getPicture().getBytes(), authentication.getName(), postDto.getTitle(),
                 postDto.getDescription(), postDto.isForFriendsOnly(), postDto.isPrivate());
-        return "index";
+        return "redirect:/";
     }
 }
