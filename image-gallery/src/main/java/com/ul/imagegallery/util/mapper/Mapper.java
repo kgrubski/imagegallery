@@ -17,7 +17,7 @@ public class Mapper {
     public static PostDto mapFromPost(Post post){
         PostDto postDto = new PostDto();
         List<CommentDto> commentDtoList = mapFromComment(post.getCommentList());
-        postDto.setAuthor(post.getAuthor().getUsername());
+        postDto.setAuthor(mapFromUser(post.getAuthor()));
         postDto.setBytePicture(post.getPicture().getImage());
         postDto.setCommentList(commentDtoList);
         postDto.setDescription(post.getDescription());
@@ -41,6 +41,7 @@ public class Mapper {
     private static UserDto mapFromUser(User user){
         UserDto userDto = new UserDto();
         userDto.setFirstName(user.getUsername());
+        userDto.setId(user.getId());
         return userDto;
     }
 

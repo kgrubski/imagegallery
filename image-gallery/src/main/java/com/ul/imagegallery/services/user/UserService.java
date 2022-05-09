@@ -8,5 +8,5 @@ public interface UserService {
 
     User saveUser(String user, String password);
 
-    boolean followUser(String user, String followedUser);
+    boolean followUser(String user, Long followedUser);
 }
