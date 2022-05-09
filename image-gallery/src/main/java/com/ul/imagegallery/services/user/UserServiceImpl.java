@@ -40,13 +40,17 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public boolean followUser(String user, String followedUser) {
+    public boolean followUser(String user, Long followedUserId) {
         Optional<User> currentUser = userRepository.findByUsername(user);
-        Optional<User> followedUserFromDb = userRepository.findByUsername(followedUser);
+        Optional<User> followedUserFromDb = userRepository.findById(followedUserId);
         if (currentUser.isEmpty() || followedUserFromDb.isEmpty()) {
             return false;
         }
+        if (currentUser.get().getId().equals(followedUserFromDb.get().getId())) {
+            return false;
+        }
         currentUser.get().getFriend().add(followedUserFromDb.get());
+        userRepository.save(currentUser.get());
         return true;
 
     }

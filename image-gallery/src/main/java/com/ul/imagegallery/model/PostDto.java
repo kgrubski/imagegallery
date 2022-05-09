@@ -10,7 +10,7 @@ public class PostDto {
     private MultipartFile picture;
     private String title;
     private byte[] bytePicture;
-    private String author;
+    private UserDto author;
     private List<CommentDto> commentList;
     private int likeCounter;
     private String description;

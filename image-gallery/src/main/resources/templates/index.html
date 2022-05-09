@@ -14,7 +14,13 @@
 </ul>
 <br>
 <tr th:each="post: ${wallDto.getPostDtoList()}">
-    Autor: <td th:text="${post.getAuthor()}"/>
+    Autor: <td th:text="${post.getAuthor().getFirstName()}"/>
+    <form th:action="@{/user/follow}" method="POST" enctype="multipart/form-data">
+        <input type="hidden" name="id" th:value="${post.getAuthor().getId()}" />
+        <button type="submit" class="submit-btn" th:text="#{label.form.follow.user}">Like</button>
+        <br>
+        <br>
+    </form>
     <br>
     <img class='img-thumbnail' th:src="'data:image/jpeg;base64,' + ${wallDto.getImgUtil().getImgData(post.bytePicture)}"/>
     <br>
