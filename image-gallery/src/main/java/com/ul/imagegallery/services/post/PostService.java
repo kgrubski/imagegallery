@@ -1,12 +1,13 @@
 package com.ul.imagegallery.services.post;
 
 import com.ul.imagegallery.database.entity.Post;
+import com.ul.imagegallery.model.PostDto;
 
 import java.util.List;
 
 public interface PostService {
 
-    List<Post> getPostsForUser(String userName);
+    List<PostDto> getPostsForUser(String userName);
 
     boolean addPost(byte[] file, String authorName, String title, String description, boolean isForFriendsOnly, boolean isPrivate);
 

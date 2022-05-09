@@ -13,11 +13,15 @@
 <body>
 <h2>Upload your images</h2>
 <p th:text="${message}" th:if="${message ne null}" class="alert alert-primary"></p>
-<form method="post" th:action="@{/upload}" enctype="multipart/form-data">
-    <div class="form-group">
-        <input type="file" name="file" class="choose-img-btn">
-    </div>
-    <button type="submit" class="upload-btn">Upload File</button>
+
+<form action="#" th:action="@{/upload}" th:object="${post}" method="POST" enctype="multipart/form-data">
+    <p>title: <input type="text" th:field="*{title}" /></p>
+    <p>description: <input type="text" th:field="*{description}" /></p>
+    <p>private: <input type="checkbox" th:field="*{private}" /></p>
+    <p>friends only: <input type="checkbox" th:field="*{forFriendsOnly}" /></p>
+    <p>document:<input type="file" th:field="*{picture}" multiple="multiple"/>
+        <input type="submit" value="upload" />
+        <input type="reset" value="Reset" /></p>
 </form>
 </body>
 </html>

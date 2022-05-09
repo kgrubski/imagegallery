@@ -29,6 +29,9 @@ public class PictureServiceImpl implements PictureService {
     @Override
     public byte[] getPicture() {
         List<Picture> all = pictureRepository.findAll();
+        if(all.isEmpty()){
+            return null;
+        }
         Random random = new Random();
         return all.get(random.nextInt(all.size())).getImage();
     }

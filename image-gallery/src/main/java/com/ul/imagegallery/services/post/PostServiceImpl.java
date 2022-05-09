@@ -4,12 +4,18 @@ import com.ul.imagegallery.database.entity.Comment;
 import com.ul.imagegallery.database.entity.Picture;
 import com.ul.imagegallery.database.entity.Post;
 import com.ul.imagegallery.database.entity.User;
+import com.ul.imagegallery.database.repository.CommentRepository;
+import com.ul.imagegallery.database.repository.PictureRepository;
 import com.ul.imagegallery.database.repository.PostRepository;
 import com.ul.imagegallery.database.repository.UserRepository;
+import com.ul.imagegallery.model.PostDto;
+import com.ul.imagegallery.services.picture.PictureService;
+import com.ul.imagegallery.util.mapper.PostMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.*;
+import java.util.stream.Collectors;
 
 @Service
 public class PostServiceImpl implements PostService {
@@ -20,29 +26,35 @@ public class PostServiceImpl implements PostService {
     @Autowired
     UserRepository userRepository;
 
+    @Autowired
+    PictureRepository pictureRepository;
+
+    @Autowired
+    CommentRepository commentRepository;
+
 
     @Override
-    public List<Post> getPostsForUser(String userName) {
+    public List<PostDto> getPostsForUser(String userName) {
         List<Post> postList = postRepository.findAll();
         List<Post> filteredPostList = new ArrayList<>();
         User user = userRepository.findByUsername(userName).orElse(null);
         for (Post post : postList) {
             if (!post.isForFriendsOnly() && !post.isPrivate()) {
                 filteredPostList.add(post);
-                break;
+                continue;
             }
 
             if (post.isPrivate() && post.getAuthor().equals(user)) {
                 filteredPostList.add(post);
-                break;
+                continue;
             }
 
-            if (post.isForFriendsOnly() && post.getAuthor().getFriend().contains(user)) { // todo
+            if (post.isForFriendsOnly() && post.getAuthor().getFriend().contains(user)) { // todo check if working
                 filteredPostList.add(post);
-                break;
+                continue;
             }
         }
-        return filteredPostList;
+        return filteredPostList.stream().map(PostMapper::mapFromPost).collect(Collectors.toList());
     }
 
 
@@ -63,7 +75,8 @@ public class PostServiceImpl implements PostService {
         post.setPrivate(isPrivate);
         post.setPicture(picture);
 
-        postRepository.save(post); // todo add picture repository?
+        pictureRepository.save(picture);
+        postRepository.save(post);
         return true;
     }
 
@@ -98,7 +111,8 @@ public class PostServiceImpl implements PostService {
         comment.setPost(post);
         comment.setValue(value);
 
-        postRepository.save(post); // todo add commentRepo?
+        commentRepository.save(comment);
+        postRepository.save(post);
 
         return true;
     }

@@ -1,3 +1,5 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <html>
     <head>
         <title>Image Gallery</title>
@@ -11,7 +13,20 @@
     <li><a href="/user/registration">Register</a></li>
 </ul>
 <br>
-<img class='img-thumbnail' th:src="'data:image/jpeg;base64,' + ${user.getImgUtil().getImgData(user.imgData)}" />
+<tr th:each="post: ${wallDto.getPostDtoList()}">
+    Autor: <td th:text="${post.getAuthor()}"/>
+    <br>
+    <img class='img-thumbnail' th:src="'data:image/jpeg;base64,' + ${wallDto.getImgUtil().getImgData(post.bytePicture)}"/>
+    <br>
+    Opis: <td th:text="${post.getDescription()}"/>
+    <br>
+    Lajki: <td th:text="${post.getLikeCounter()}"/>
+    <br>
+    Title: <td  th:text="${post.getTitle()}"/>
+    <br>
+    <br>
+</tr>
+
 </body>
 
 </html>
