@@ -9,8 +9,7 @@ import com.ul.imagegallery.database.repository.PictureRepository;
 import com.ul.imagegallery.database.repository.PostRepository;
 import com.ul.imagegallery.database.repository.UserRepository;
 import com.ul.imagegallery.model.PostDto;
-import com.ul.imagegallery.services.picture.PictureService;
-import com.ul.imagegallery.util.mapper.PostMapper;
+import com.ul.imagegallery.util.mapper.Mapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -54,7 +53,7 @@ public class PostServiceImpl implements PostService {
                 continue;
             }
         }
-        return filteredPostList.stream().map(PostMapper::mapFromPost).collect(Collectors.toList());
+        return filteredPostList.stream().map(Mapper::mapFromPost).collect(Collectors.toList());
     }
 
 
@@ -108,8 +107,8 @@ public class PostServiceImpl implements PostService {
         }
         Comment comment = new Comment();
         comment.setAuthor(user.get());
-        comment.setPost(post);
         comment.setValue(value);
+        commentList.add(comment);
 
         commentRepository.save(comment);
         postRepository.save(post);
@@ -137,7 +136,12 @@ public class PostServiceImpl implements PostService {
             likedBy.remove(user.get());
             post.setLikeCounter(post.getLikeCounter() - 1);
             postRepository.save(post);
+            return true;
         }
+
+        post.getLikedBy().add(user.get());
+        post.setLikeCounter(post.getLikeCounter()+1);
+        postRepository.save(post);
         return true;
     }
 

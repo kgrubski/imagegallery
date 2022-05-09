@@ -18,7 +18,4 @@ public class Comment {
 
     private String value;
 
-    @ManyToOne
-    @JoinColumn(name = "post_id")
-    private Post post;
 }

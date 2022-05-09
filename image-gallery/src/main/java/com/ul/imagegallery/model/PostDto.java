@@ -11,7 +11,7 @@ public class PostDto {
     private String title;
     private byte[] bytePicture;
     private String author;
-    private List<String> commentList;
+    private List<CommentDto> commentList;
     private int likeCounter;
     private String description;
     private Long id;
