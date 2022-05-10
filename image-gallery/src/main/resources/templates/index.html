@@ -9,55 +9,49 @@
 <ul>
     <li><a class="home" href="/">Home</a></li>
     <li><a href="/upload">Upload</a></li>
-    <li><a href="/login">Log In</a></li>
     <li><a href="/user/registration">Register</a></li>
+    <li><a href="/login">Log In</a></li>
 </ul>
 <br>
 <tr th:each="post: ${wallDto.getPostDtoList()}">
-    Autor: <td th:text="${post.getAuthor().getFirstName()}"/>
+    <div class="image-section">
+        <div class="author-section">
     <form th:action="@{/user/follow}" method="POST" enctype="multipart/form-data">
         <input type="hidden" name="id" th:value="${post.getAuthor().getId()}" />
-        <button type="submit" class="submit-btn" th:text="#{label.form.follow.user}">Like</button>
-        <br>
-        <br>
+        <div class="author"><div class="author-text">Author:  </div><td th:text="${post.getAuthor().getFirstName()}"/>
+            <br>
+            <div class="author-text">Description:  </div> <td th:text="${post.getDescription()}"/>
+            <br>
+            <div class="author-text">Title:  </div> <td  th:text="${post.getTitle()}"/>
+            <br></div>
     </form>
     <br>
+        </div>
     <img class='img-thumbnail' th:src="'data:image/jpeg;base64,' + ${wallDto.getImgUtil().getImgData(post.bytePicture)}"/>
-    <br>
-    Opis: <td th:text="${post.getDescription()}"/>
-    <br>
-    Lajki: <td th:text="${post.getLikeCounter()}"/>
-    <br>
-    Title: <td  th:text="${post.getTitle()}"/>
-    <br>
-    Comment: <br>
-    <p th:each="comment: ${post.getCommentList()}">
-        <span th:text="Name + ${comment.getAuthor().getFirstName()}">Name </span>
+        <form th:action="@{/comment/like}" method="POST" enctype="multipart/form-data">
+            <input type="hidden" name="id" th:value="${post.id}" />
+            <button type="submit" class="follow-btn" th:text="#{label.form.follow.user}">Like</button>
+            <button type="submit" class="like-btn" th:text="#{label.form.like.comment}">Like</button>
+            <div class="likes">Likes: <td th:text="${post.getLikeCounter()}"/></div>
+        </form>
         <br>
-        <span th:text="Comment + ${comment.getValue()}">Comment </span>
+        <br><br>
+    <div class="comment-section">Comment Section</div>
+        <p class="username-comment" th:each="comment: ${post.getCommentList()}">
+        Username: <span th:text="${comment.getAuthor().getFirstName()}">Name </span>
+        <br>
+        Comment: <span th:text="${comment.getValue()}">Comment </span>
     </p>
-    <br>
-    <br>
     <form th:action="@{/comment/add}" method="POST" enctype="multipart/form-data">
+        <div class="add-comment-section">
         <input type="hidden" name="id" th:value="${post.id}" />
-        <p>komentarz: <input type="text" name="value" /></p>
-        <button type="submit" class="submit-btn" th:text="#{label.form.add.comment}">Add comment</button>
-        <br>
-        <br>
+       <div class="comment">Comment: <input type="text" class="input-comment" placeholder="Comment" name="value" /></div>
+            <button type="submit" class="comment-btn" th:text="#{label.form.add.comment}">Add comment</button>
+            <br>
+            <br>
+        </div>
     </form>
-    <br>
-    <br>
-    <form th:action="@{/comment/like}" method="POST" enctype="multipart/form-data">
-        <input type="hidden" name="id" th:value="${post.id}" />
-        <button type="submit" class="submit-btn" th:text="#{label.form.like.comment}">Like</button>
-        <br>
-        <br>
-    </form>
-    <br>
-    <br>
-    <br>
+    </div>
 </tr>
-
 </body>
-
 </html>
